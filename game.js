@@ -1,11 +1,11 @@
 const question = document.getElementById("question");
 const choices = Array.from(document.getElementsByClassName("choice-text"));
 
-let currentQuestion = {}; //
-let acceptingAnswers = false;
+let currentQuestion = {}; 
+let acceptingAnswers = false; //　ここでは　let acceptingAnswers; に書き換えてもいい？
 let score = 0;
 let questionCounter = 0;
-let availableQuestions = []; //
+let availableQuestions = []; 
 
 let questions = [
   {
@@ -41,7 +41,7 @@ const MAX_QUESTIONS = 3;
 
 startGame = () => {
   questionCounter = 0;
-  score = 0;
+  score = 0;   //Line 6,7 すでに定義したので、なぜ Line43, 44 で同じvalueを入れる必要がある？Can we delete line 43,44?
   availableQuestions = [...questions]
   getNewQuestion();
 }
@@ -63,17 +63,26 @@ getNewQuestion = () => {
   });
 
   availableQuestions.splice(questionIndex, 1);
-  acceptingAnswers = true;
+  acceptingAnswers = true; //
 };
-
-//ここから理解出来ない。
 
 choices.forEach(choice => {
   choice.addEventListener("click", e => {
-    if(!acceptingAnswers) return;
+    if(acceptingAnswers == false) return;
 
-    acceptingAnswers = false;
-    
+    acceptingAnswers = false; //なぜsetting false?? 
+    const selectedChoice = e.target;
+    const selectedAnswer = selectedChoice.dataset["number"];
+
+    const classToApply =
+      selectedAnswer == currentQuestion.answer ? "correct" : "incorrect";
+
+      selectedChoice.parentElement.classList.add(classToApply);
+
+      setTimeout(() => {
+        selectedChoice.parentElement.classList.remove(classToApply);
+        getNewQuestion();
+      },2000)
   })
 })
 
