@@ -66,6 +66,8 @@ getNewQuestion = () => {
   acceptingAnswers = true;
 };
 
+//ここから理解出来ない。
+
 choices.forEach(choice => {
   choice.addEventListener("click", e => {
     if(!acceptingAnswers) return;
