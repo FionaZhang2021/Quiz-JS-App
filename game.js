@@ -28,10 +28,10 @@ fetch("https://opentdb.com/api.php?amount=20&category=9&difficulty=easy&type=mul
       const answerChoices = [...loadedQuestion.incorrect_answers];
       answerChoices.splice(formattedQuestion.answer-1, 0, 
         loadedQuestion.correct_answer);
-      console.log(answerChoices);  
 
       answerChoices.forEach((choice, index) => {
-        formattedQuestion["choice" + (index + 1)] = choice;
+        formattedQuestion["choice" + (index + 1)] = choice
+        choice.replace(/&.*;/, "'");
       });   
       return formattedQuestion;
     });
@@ -54,6 +54,8 @@ startGame = () => {
   loader.classList.add("hidden")
 }
 
+//After fetched data will repeat below function
+
 getNewQuestion = () => {
   if (availableQuestions.length ===0 || questionCounter >= MAX_QUESTIONS) {
     localStorage.setItem('mostRecentScore', score);
@@ -68,7 +70,10 @@ getNewQuestion = () => {
 
   const questionIndex = Math.floor(Math.random() * availableQuestions.length);
   currentQuestion = availableQuestions[questionIndex];
-  question.innerText = currentQuestion.question;
+  //question.innerText = currentQuestion.question;
+  question.innerText = currentQuestion.question
+  .replace(/&.*9;/, "'")
+  .replace(/&.*t;/ || /&.*o;/,`"`);
 
   choices.forEach( choice => {
     const number = choice.dataset['number'];
@@ -80,6 +85,7 @@ getNewQuestion = () => {
 };
 
 choices.forEach(choice => {
+
   choice.addEventListener("click", e => {
     if(acceptingAnswers == false) return;
 

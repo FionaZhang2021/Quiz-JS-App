@@ -129,3 +129,10 @@ input {
 input::placeholder {
   color: #aaa
 }
+
+@media screen and (max-width:600px){
+  .container {
+    height: 100%;
+    padding-top: 10vh;
+  }
+}

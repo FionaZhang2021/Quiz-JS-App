@@ -81,3 +81,9 @@
     transform: rotate(360deg);
   }
 }
+
+@media screen and (max-width:600px){
+  #question {
+    font-size: 2.8rem;
+  }
+}
