@@ -89,7 +89,7 @@ choices.forEach(choice => {
   choice.addEventListener("click", e => {
     if(acceptingAnswers == false) return;
 
-    acceptingAnswers = false; //なぜsetting false?? 
+    acceptingAnswers = false; //なぜsetting false??? 
     const selectedChoice = e.target;
     const selectedAnswer = selectedChoice.dataset["number"];
 
